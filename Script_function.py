@@ -5,6 +5,10 @@ from typing import Any, Optional
 import pyautogui
 import time
 import pydirectinput
+import random
+
+PAUSE = random.uniform(0.180, 0.220)
+pyautogui.PAUSE = PAUSE
 
 
 def click(obj: str, printability: bool = True, butt: str = 'left') -> None:
@@ -17,6 +21,7 @@ def click(obj: str, printability: bool = True, butt: str = 'left') -> None:
     pyautogui.moveTo(x, y)
     time.sleep(0.1)
     pyautogui.mouseDown(button=butt)
+    time.sleep(0.05)
     pyautogui.mouseUp(button=butt)
     pyautogui.moveTo(50, 50)
     if printability:
@@ -29,6 +34,7 @@ def click_xy(x: int, y: int, printability: bool = True, butt: str = 'left') -> N
     pyautogui.moveTo(x, y)
     time.sleep(0.1)
     pyautogui.mouseDown(button=butt)
+    time.sleep(0.05)
     pyautogui.mouseUp(button=butt)
     pyautogui.moveTo(50, 50)
     if printability:
@@ -96,15 +102,16 @@ def wait_and_click(obj: str, confidence: float = 0.8, times: int = 0) -> None:
         print('Click ' + obj + ' successfully!')
         return
     print('Oops...times up... :<')
+    return
 
 
-def multiple_click(click_list: list) -> None:
+def multiple_click(click_list: list, interval: float = 0.3) -> None:
     """Click a sequence of buttons
     """
     for button in click_list:
         wait_and_click(button)
         pyautogui.moveTo(50, 50)
-        time.sleep(0.2)
+        time.sleep(interval)
 
 
 def translate_name_to_pic(names: set[str]) -> set:
@@ -133,6 +140,8 @@ exit_now = 'picture/exit_now.png'
 play_again = 'picture/play_again.png'
 my_self = 'picture/my_self.png'
 test = 'picture/test.png'
+
+
 # TEN_MINUTES = 605
 
 
@@ -240,3 +249,37 @@ def auto_pick(build_list: set[str], games_interval: int) -> None:
             #         is_end = True
         print('')
         time.sleep(0.5)
+
+
+####################################
+# Seer section
+####################################
+
+def seer_ray_gay():
+    """
+
+    :return:
+    """
+    draw_butt = 'picture/Seer/draw.png'
+    revive_butt = 'picture/Seer/revive.png'
+    ezmode_butt = 'picture/Seer/ez_mode.png'
+    confirm_butt = 'picture/Seer/confirm.png'
+    atk_butt = 'picture/Seer/ATK.png'
+    cont_butt = 'picture/Seer/cont.png'
+    open_butt = 'picture/Seer/open.png'
+    times = 0
+    while True:
+        times += 1
+
+        wait_and_click(draw_butt)
+        # Get ready to earn a new box
+        multiple_click([revive_butt, ezmode_butt, confirm_butt], 0.5)
+        time.sleep(10)
+        wait_and_click(atk_butt)
+        wait_and_click(cont_butt)
+        time.sleep(9)
+        wait_and_click(open_butt)
+
+
+if __name__ == "__main__":
+    seer_ray_gay()

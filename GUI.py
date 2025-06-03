@@ -12,7 +12,7 @@ from threading import Thread
 import time
 from sys import exit
 
-time_between_games = 15
+time_between_games = 6
 champ_set = set()
 surr_time = 605
 
