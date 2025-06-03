@@ -1,0 +1,4 @@
+cx_Freeze==6.6
+PyAutoGUI==0.9.52
+PyDirectInput==1.0.4
+PySide2==5.15.2
